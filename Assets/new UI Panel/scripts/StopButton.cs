@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StopButton : MonoBehaviour
 {
+    public NetworkHandler networkHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,10 @@ public class StopButton : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnButtonClick()
+    {
+        networkHandler.StopPlaying();
     }
 }

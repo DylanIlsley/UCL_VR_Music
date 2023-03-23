@@ -52,6 +52,15 @@ namespace AudioMessage
         //int m_newAudioID;
         public int m_iStartTime = -1;
     }
+    
+    class AudioTrackClearRequest : MessageInterface
+    {
+        public AudioTrackClearRequest()
+        {
+            m_uGroupID = 2;
+            m_uUnitID = 1;
+        }
+    }
 
     /*
     class MasterControlStatusRequestMessage: MessageInterface

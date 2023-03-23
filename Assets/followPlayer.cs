@@ -17,7 +17,7 @@ public class followPlayer : MonoBehaviour
     void Update()
     {
         transform.position = player.position + player.TransformDirection(offset);
-        transform.rotation = Quaternion.Euler(15, 0, 0);
-        //transform.rotation = player.rotation * Quaternion.Euler(15, 0, 0);
+        transform.rotation = Quaternion.Euler(15, 0, 0); 
+        transform.rotation = player.rotation * Quaternion.Euler(15, 0, 0);
     }
 }

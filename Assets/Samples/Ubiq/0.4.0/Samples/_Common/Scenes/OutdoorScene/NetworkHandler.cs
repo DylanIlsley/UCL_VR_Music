@@ -15,6 +15,14 @@ public class NetworkHandler : MonoBehaviour
 {
     public void TriggerSound(AudioSource audioSource, int iStartTime)
     {
+        // Only play a sound and add it to the loop if it is in edit mode
+        if (!m_bEdit)
+            return;
+
+        // If it is not playing, then it should not be allowed to be apart of the loop either
+        if (!m_bPlay)
+            return;
+
         int iLoopTime = iStartTime - (int)m_LoopStartTime;
 
         // Update recording for future playing
@@ -38,6 +46,41 @@ public class NetworkHandler : MonoBehaviour
             Debug.LogError("Trigger audio with name " + "with start time [" + iStartTime.ToString() + "] could not be found");
 
 
+    }
+
+    public void SetEditMode(bool bEnableEdit)
+    {
+
+        Debug.Log("Changing edit mode to " + (bEnableEdit ? "true" : "false"));
+        m_bEdit = bEnableEdit;
+    }
+
+    public void StartPlaying()
+    {
+        if (m_bPlay)
+            Debug.LogWarning("Start playing called whilst already started");
+        else
+            Debug.Log("Start playing called");
+        m_bPlay = true;
+    }
+
+    public void StopPlaying()
+    {
+        if (m_bPlay)
+            Debug.LogWarning("Stop playing called whilst already stopped");
+        else
+            Debug.Log("Stop playing called");
+        m_bPlay = false;
+        m_currentAudioSource.Stop();
+    }
+
+    public void ClearRecording()
+    {
+        Debug.Log("Clearing current recording");
+
+        m_currentAudioSource.clip = AudioClip.Create("LoopedMusic", m_iSampleRate_Hz * (int)m_LoopDuration_s, 1, m_iSampleRate_Hz, false);
+        
+        SendAudioTrackClear();
     }
 
     // Start is called before the first frame update
@@ -69,13 +112,12 @@ public class NetworkHandler : MonoBehaviour
         // Will need to add further controls at a later point
         if (!m_currentAudioSource.isPlaying)
         {
-            Debug.Log("Not playing");
             m_LoopStartTime = Time.time;
 
             if (m_bPlay)
                 m_currentAudioSource.Play();
 
-            SendAudioTrackRequest();
+            //SendAudioTrackRequest();
 
             // TODO: Master control will need to be checked here and exchanged at this point if master
             /*
@@ -97,6 +139,8 @@ public class NetworkHandler : MonoBehaviour
         RegisterUnitMessage(new AudioTrackRequest(), OnAudioTrackRequest);
         RegisterUnitMessage(new AudioTrackResponse(), OnAudioTrackResponse);
         RegisterUnitMessage(new AudioTrackUpdate(), OnAudioTrackUpdate);
+
+        RegisterUnitMessage(new AudioTrackClearRequest(), OnAudioTrackClear);
 
 
         // GROUP 1 - Master messages
@@ -167,6 +211,14 @@ public class NetworkHandler : MonoBehaviour
         });
     }
 
+    public void SendAudioTrackClear()
+    {
+        Debug.Log("Sending audio track clear request");
+        context.SendJson(new AudioTrackClearRequest()
+        {
+        });
+    }
+
     private void OnAudioTrackRequest(ReferenceCountedSceneGraphMessage m)
     {
         Debug.Log("OnAudioTrackRequest received");
@@ -193,6 +245,14 @@ public class NetworkHandler : MonoBehaviour
         audioSource.clip.GetData(samples, 0);
 
         m_currentAudioSource.clip.SetData(samples, message.m_iStartTime * m_iSampleRate_Hz);
+    }
+
+    private void OnAudioTrackClear(ReferenceCountedSceneGraphMessage m)
+    {
+        var message = m.FromJson<AudioTrackUpdate>();
+        Debug.Log("OnAudioTrackClear received");
+
+        m_currentAudioSource.clip = AudioClip.Create("LoopedMusic", m_iSampleRate_Hz * (int)m_LoopDuration_s, 1, m_iSampleRate_Hz, false);
     }
 
 
@@ -306,7 +366,8 @@ public class NetworkHandler : MonoBehaviour
 
     private NetworkContext context;
 
-    bool m_bPlay = true;
+    public bool m_bPlay = true;
+    bool m_bEdit = true;
     private AudioSource m_nextAudioSource;
     public AudioSource m_currentAudioSource;
 

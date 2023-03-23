@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DeleteButton : MonoBehaviour
 {
+
+    public NetworkHandler networkHandler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,10 @@ public class DeleteButton : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnButtonClick()
+    {
+        networkHandler.ClearRecording();
     }
 }
