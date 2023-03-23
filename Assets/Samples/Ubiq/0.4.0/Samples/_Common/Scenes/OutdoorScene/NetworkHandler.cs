@@ -47,7 +47,7 @@ public class NetworkHandler : MonoBehaviour
         m_currentAudioSource = gameObject.AddComponent<AudioSource>();
         m_currentAudioSource.volume = 1.0f;
         m_currentAudioSource.clip = AudioClip.Create("LoopedMusic", m_iSampleRate_Hz * (int)m_LoopDuration_s, 1, m_iSampleRate_Hz, false);
-        m_currentAudioSource.spatialBlend = 1;
+        m_currentAudioSource.spatialBlend = 0;
         RegisterUnitMessages();
         context = NetworkScene.Register(this);
         Debug.Log(NetworkId);
