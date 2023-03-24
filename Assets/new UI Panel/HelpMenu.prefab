@@ -87,12 +87,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 729605516591246625}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e923c248067549a4597420bfc8b049d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 37e2426636943394eac233c84cda85cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Content: {fileID: 0}
-  MenuItemPrefab: {fileID: 4532311744136202311, guid: ddb6a9e3aea8b804f98dcefaf40d7f51, type: 3}
-  Catalogue: {fileID: 11400000, guid: e9294dc4382ae304a8ee8961eaa34805, type: 2}
+  player: {fileID: 0}
+  offset: {x: 1, y: 1, z: 1}
 --- !u!1 &729605516990494208
 GameObject:
   m_ObjectHideFlags: 0

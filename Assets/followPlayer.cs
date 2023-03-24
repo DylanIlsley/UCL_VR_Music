@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class followPlayer : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    [SerializeField] public Transform player;
     [SerializeField] private Vector3  offset;
 
     // Start is called before the first frame update
