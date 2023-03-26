@@ -20,4 +20,5 @@ public class EffectPlayer : MonoBehaviour
         _hitEffect.Play();
     }
 
+
 }
