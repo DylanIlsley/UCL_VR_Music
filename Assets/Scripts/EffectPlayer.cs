@@ -5,11 +5,13 @@ using UnityEngine.VFX;
 
 public class EffectPlayer : MonoBehaviour
 {
-
     [SerializeField] VisualEffect _hitEffect;
 
     private void OnTriggerEnter(Collider other) {
-        PlayParticle();
+        if(other.gameObject.name.Equals("Manipulator") == true)
+        {
+            PlayParticle();
+        }
     }
 
     private void OnMouseDown() {
@@ -19,6 +21,5 @@ public class EffectPlayer : MonoBehaviour
     void PlayParticle(){
         _hitEffect.Play();
     }
-
 
 }
