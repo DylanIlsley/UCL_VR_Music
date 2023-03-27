@@ -728,9 +728,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<sprite index=0>: Starts/Stops loop recording\nStart: Plays loop recording\nStop:
-    Stops loop recording \nConfirm: Saves recording \nDelete: Deletes recording\nHelp:
-    Toggles Help Menu"
+  m_text: "<sprite index=0>: Starts/Stops loop recording\nRecord: Sounds played are
+    added to the loops \nFriends: Toggles friends menu\nDelete: Deletes all tracks
+    currently in the loop\nHelp: Toggles Help Menu"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc6aad46d8dbff54db43d9407a04c1ed, type: 2}
   m_sharedMaterial: {fileID: 7681750965049287363, guid: fc6aad46d8dbff54db43d9407a04c1ed, type: 2}
