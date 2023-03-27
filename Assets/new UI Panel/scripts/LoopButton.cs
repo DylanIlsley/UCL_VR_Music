@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.SimpleSpinner;
+using TMPro;
 
 public class LoopButton : MonoBehaviour
 {
     public NetworkHandler networkHandler;
-    
+    private TextMeshProUGUI m_txtCounter;
     bool m_bEnableLoop = false;
 
 
@@ -16,6 +17,7 @@ public class LoopButton : MonoBehaviour
     {
         //SetColorsFromEditMode(m_bEdit);
         SimpleSpinner simpleSpinner = GetComponentsInChildren<SimpleSpinner>()[0];
+        m_txtCounter = GetComponentsInChildren<TextMeshProUGUI>()[0];
         simpleSpinner.Rotation = m_bEnableLoop;
         if (m_bEnableLoop)
             networkHandler.StartPlaying();
@@ -28,6 +30,11 @@ public class LoopButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
             ToggleLoopState();
+
+        if(m_bEnableLoop)
+        {
+            m_txtCounter.text = networkHandler.GetCurrentLoopTime().ToString();
+        }
     }
 
     public void OnButtonClick()

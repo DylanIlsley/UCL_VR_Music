@@ -280,6 +280,11 @@ public class NetworkHandler : MonoBehaviour
         m_currentAudioSource.clip = AudioClip.Create("LoopedMusic", m_iSampleRate_Hz * (int)m_LoopDuration_s, 1, m_iSampleRate_Hz, false);
     }
 
+    public int GetCurrentLoopTime()
+    {
+        return (int)(Time.time - m_LoopStartTime);
+    }
+
 
 
     /*
