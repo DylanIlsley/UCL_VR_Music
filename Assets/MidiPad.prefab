@@ -2108,6 +2108,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8085207318713472690, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: Bongo
