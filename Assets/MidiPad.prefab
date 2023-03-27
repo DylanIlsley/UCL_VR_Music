@@ -118,6 +118,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: SoftChordCACollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: SoftChordCA
@@ -506,6 +510,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: HiHat2Collider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: HiHat2
@@ -832,6 +840,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: Bells2Collider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: Bells2
@@ -971,6 +983,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: TomCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
@@ -1112,6 +1128,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: HarpFullCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: HarpFull
@@ -1252,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: EPianoLowCCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: EpianoLowC
@@ -1330,6 +1354,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: FloomFCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: FloomF
@@ -1407,6 +1435,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: EPianoCCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
@@ -1672,6 +1704,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: HiHatCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: HiHat
@@ -1811,6 +1847,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: EchoFCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
@@ -1952,6 +1992,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: HarpCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: HarpPart
@@ -2030,6 +2074,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: SnareCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: Snare
@@ -2107,6 +2155,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: BongoCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8085207318713472690, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Enabled
@@ -2190,6 +2242,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: EchoCCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: EchoSoftC
@@ -2268,6 +2324,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: SoftChordECCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: SoftChordEC
@@ -2345,6 +2405,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: FDrumCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
@@ -2486,6 +2550,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: FloomCCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: FloomC
@@ -2564,6 +2632,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: PercussionCollider
+      objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
       value: Percussion
@@ -2641,6 +2713,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: KickCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name
@@ -2843,6 +2919,10 @@ PrefabInstance:
     - target: {fileID: 7607128056614163704, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978408820060156402, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
+      propertyPath: m_Name
+      value: BellsCollider
       objectReference: {fileID: 0}
     - target: {fileID: 8896429136784471255, guid: 5caa8ac441a1f4f73b3de419f86c5e1f, type: 3}
       propertyPath: m_Name

@@ -17,16 +17,21 @@ public class RecordButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+            ToggleRecordState();
     }
 
     public void OnButtonClick()
+    {
+        ToggleRecordState();
+    }
+
+    private void ToggleRecordState()
     {
         m_bRecord = !m_bRecord;
 
         SetRecordingMode(m_bRecord);
     }
-
     private void SetRecordingMode(bool bRecord)
     {
         networkHandler.SetEditMode(bRecord);

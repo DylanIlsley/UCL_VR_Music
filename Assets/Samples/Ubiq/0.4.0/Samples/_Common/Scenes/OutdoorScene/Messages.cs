@@ -50,7 +50,7 @@ namespace AudioMessage
         //public AudioSource m_NewAudio;
         public int m_iAudioID = -1;
         //int m_newAudioID;
-        public int m_iStartTime = -1;
+        public float m_fStartTime = -1;
     }
     
     class AudioTrackClearRequest : MessageInterface

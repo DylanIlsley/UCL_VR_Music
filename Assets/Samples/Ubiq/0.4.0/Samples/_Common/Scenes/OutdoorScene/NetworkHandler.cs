@@ -13,8 +13,9 @@ using UnityEngine.UI;
 
 public class NetworkHandler : MonoBehaviour
 {
-    public void TriggerSound(AudioSource audioSource, int iStartTime)
+    public void TriggerSound(AudioSource audioSource, float fStartTime)
     {
+        Debug.Log("Triggering sound..." + audioSource.name);
         // Only play a sound and add it to the loop if it is in edit mode
         if (!m_bEdit)
             return;
@@ -23,27 +24,33 @@ public class NetworkHandler : MonoBehaviour
         if (!m_bPlay)
             return;
 
-        int iLoopTime = iStartTime - (int)m_LoopStartTime;
+        float fLoopTime = fStartTime - m_LoopStartTime;
 
         // Update recording for future playing
 
-        // Then add for playing in future loops. Could we potentially use audio sources here or triggers? Would make saving difficult though
-        // Would allow effects
 
-
-        // TODO: Add with original audio and clip for now
-        // Also going to make more complicated to add handle overlapping... DO we just clip?
         float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
         audioSource.clip.GetData(samples, 0);
 
-        m_currentAudioSource.clip.SetData(samples, iLoopTime*m_iSampleRate_Hz);
+        float[] currentSamples = new float[audioSource.clip.samples * m_nextAudioSource.clip.channels];
+        m_nextAudioSource.clip.GetData(currentSamples, (int)(fLoopTime * m_iSampleRate_Hz));
+
+        // Adding current track with the new track
+        float[] newSamples = new float[audioSource.clip.samples * m_nextAudioSource.clip.channels];
+        for (int i=0; i<audioSource.clip.samples; i++)
+        {
+            newSamples[i] = currentSamples[i] + samples[i];
+        }
+
+        // TODO: Need to update one for the next cycle to prevent the sound playing twice
+        m_nextAudioSource.clip.SetData(newSamples, (int)(fLoopTime * m_iSampleRate_Hz));
 
         // Sending off so that it can be used and updated on the other side
         int iAudioIndex = m_listAudioSources.IndexOf(audioSource);
         if (iAudioIndex != -1)
-            SendAudioTrackUpdate(iAudioIndex, iLoopTime);
+            SendAudioTrackUpdate(iAudioIndex, fLoopTime);
         else
-            Debug.LogError("Trigger audio with name " + "with start time [" + iStartTime.ToString() + "] could not be found");
+            Debug.LogError("Trigger audio with name " + audioSource.name + "with start time [" + fStartTime.ToString() + "] could not be found");
 
 
     }
@@ -91,6 +98,7 @@ public class NetworkHandler : MonoBehaviour
         m_currentAudioSource.volume = 1.0f;
         m_currentAudioSource.clip = AudioClip.Create("LoopedMusic", m_iSampleRate_Hz * (int)m_LoopDuration_s, 1, m_iSampleRate_Hz, false);
         m_currentAudioSource.spatialBlend = 0;
+        m_nextAudioSource = m_currentAudioSource;
         RegisterUnitMessages();
         context = NetworkScene.Register(this);
         Debug.Log(NetworkId);
@@ -113,6 +121,8 @@ public class NetworkHandler : MonoBehaviour
         if (!m_currentAudioSource.isPlaying)
         {
             m_LoopStartTime = Time.time;
+
+            m_currentAudioSource = m_nextAudioSource;
 
             if (m_bPlay)
                 m_currentAudioSource.Play();
@@ -201,13 +211,13 @@ public class NetworkHandler : MonoBehaviour
         context.SendJson(ATR);
     }
 
-    public void SendAudioTrackUpdate(int iAudioID, int iStartTime)
+    public void SendAudioTrackUpdate(int iAudioID, float fStartTime)
     {
-        Debug.Log("AudioID [" + iAudioID.ToString() + "] sending AudioTrackUpdate with start time " + iStartTime.ToString());
+        Debug.Log("AudioID [" + iAudioID.ToString() + "] sending AudioTrackUpdate with start time " + fStartTime.ToString());
         context.SendJson(new AudioTrackUpdate()
         { 
             m_iAudioID = iAudioID,
-            m_iStartTime = iStartTime
+            m_fStartTime = fStartTime
         });
     }
 
@@ -235,16 +245,31 @@ public class NetworkHandler : MonoBehaviour
     {
         
         var message = m.FromJson<AudioTrackUpdate>();
-        Debug.Log("OnAudioTrackUpdate received with AudioID[" + message.m_iAudioID.ToString() + "] and start time ["+ message.m_iStartTime.ToString() + "]");
+        Debug.Log("OnAudioTrackUpdate received with AudioID[" + message.m_iAudioID.ToString() + "] and start time ["+ message.m_fStartTime.ToString() + "]");
 
         // Updating audio based off this
         AudioSource audioSource = m_listAudioSources[message.m_iAudioID];
 
+        // if the start time is close enough to the current time, then play it straight away
+        float fLoopTime = Time.time - m_LoopStartTime;
+        if (message.m_fStartTime - fLoopTime < 0.1f && m_bPlay)
+            audioSource.Play();
 
         float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
         audioSource.clip.GetData(samples, 0);
 
-        m_currentAudioSource.clip.SetData(samples, message.m_iStartTime * m_iSampleRate_Hz);
+        float[] currentSamples = new float[audioSource.clip.samples * m_nextAudioSource.clip.channels];
+        m_nextAudioSource.clip.GetData(currentSamples, (int)(message.m_fStartTime * m_iSampleRate_Hz));
+
+        // Adding current track with the new track
+        float[] newSamples = new float[audioSource.clip.samples * m_nextAudioSource.clip.channels];
+        for (int i = 0; i < audioSource.clip.samples; i++)
+        {
+            newSamples[i] = currentSamples[i] + samples[i];
+        }
+
+        // UPdate sound here by adding it as well
+        m_currentAudioSource.clip.SetData(newSamples, (int)(message.m_fStartTime * m_iSampleRate_Hz));
     }
 
     private void OnAudioTrackClear(ReferenceCountedSceneGraphMessage m)

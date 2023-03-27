@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlaySound : MonoBehaviour
 {
     private AudioSource source;
-    public NetworkHandler NHandle;
+    [SerializeField] private NetworkHandler NHandle;
 
     // Start is called before the first frame update
     void Start()
