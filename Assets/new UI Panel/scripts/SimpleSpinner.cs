@@ -29,7 +29,7 @@ namespace Assets.SimpleSpinner
         {
             if (Rotation)
             {
-                transform.localEulerAngles = new Vector3(0, 0, -360 * RotationAnimationCurve.Evaluate((RotationSpeed * Time.time + _period) % 1));
+                transform.localEulerAngles = new Vector3(0, 0, -180 * RotationAnimationCurve.Evaluate((RotationSpeed * Time.time + _period) % 1));
             }
 
         }
