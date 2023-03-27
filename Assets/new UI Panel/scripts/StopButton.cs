@@ -20,6 +20,5 @@ public class StopButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        networkHandler.StopPlaying();
     }
 }
