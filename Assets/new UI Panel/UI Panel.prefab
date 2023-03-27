@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988b8df2dc127eb4fa48e96b2ce647b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkHandler: {fileID: 0}
 --- !u!1 &5318752390810814
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,9 +287,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Start
-
-'
+  m_Text: Record
 --- !u!1 &5318752742199964
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657f6a76979510d478f3ce60240e04a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkHandler: {fileID: 0}
 --- !u!1 &5318752764240313
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Stop
+  m_Text: Friends
 --- !u!1 &5318753064693848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,6 +1060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f031a03a43f31564998215c31ea01863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkHandler: {fileID: 0}
 --- !u!1 &5318753656120944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,7 +1207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: aa2441490b2cf57498e11025a0fdf21e, type: 3}
+  m_Texture: {fileID: 2800000, guid: e779ad32171e85f49bbebec977f04411, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1425,7 +1426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 3b4eb93b7e5193545b06dffda5242045, type: 3}
+  m_Texture: {fileID: 2800000, guid: f2f9800a1d8f6624db87fcc401513e95, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1702,6 +1703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007282478b5a3e64ba3999d87ecb5276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkHandler: {fileID: 0}
 --- !u!1 &5156836536579147979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,7 +2307,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
@@ -2768,7 +2770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9160284955578876022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2833,7 +2835,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9160284955578876023}
   m_HandleRect: {fileID: 9160284954702304198}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -7,13 +7,16 @@ using Assets.SimpleSpinner;
 public class LoopButton : MonoBehaviour
 {
     public NetworkHandler networkHandler;
-    bool m_bEdit = false;
+    
+    bool m_bEnableLoop = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //SetColorsFromEditMode(m_bEdit);
+        SimpleSpinner simpleSpinner = GetComponentsInChildren<SimpleSpinner>()[0];
+        simpleSpinner.Rotation = m_bEnableLoop;
     }
 
     // Update is called once per frame
@@ -23,9 +26,14 @@ public class LoopButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        networkHandler.SetEditMode(m_bEdit);
-        m_bEdit = !m_bEdit;
+        
+        m_bEnableLoop = !m_bEnableLoop;
+        if(m_bEnableLoop)
+            networkHandler.StartPlaying();
+        else
+            networkHandler.StopPlaying();
+
         SimpleSpinner simpleSpinner = GetComponentsInChildren<SimpleSpinner>()[0];
-        simpleSpinner.Rotation = !m_bEdit;
+        simpleSpinner.Rotation = m_bEnableLoop;
     }
 }
