@@ -20,6 +20,11 @@ public class YesButton : MonoBehaviour
 
      public void OnButtonClick()
     {
+        if(!networkHandler)
+        {
+            Debug.LogError("Network handler expected!");
+            return;
+        }
         networkHandler.ClearRecording();
     }
 

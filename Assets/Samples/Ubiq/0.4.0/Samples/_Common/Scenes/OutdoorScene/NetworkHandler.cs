@@ -10,12 +10,35 @@ using AudioMessage;
 using Ubiq.Extensions;
 using UnityEngine.UI;
 
+public class LastPlayed
+{
+    public LastPlayed(AudioSource audioSource, AudioSyncColor audioSyncColor, float fLoopTime)
+    {
+        m_AudioSource = audioSource;
+        m_AudioSyncColor = audioSyncColor;
+        m_fLoopTime = fLoopTime;
+    }
+
+    public AudioSource m_AudioSource;
+    public AudioSyncColor m_AudioSyncColor;
+    public float m_fLoopTime;
+}
+
 
 public class NetworkHandler : MonoBehaviour
 {
     // Calls for a network handle
     public void TriggerNetworkPanel(AudioSource audioSource, AudioSyncColor syncColor, float fStartTime)
     {
+        Debug.Log("Triggering network panel");
+        if (!m_bEdit)
+            return;
+
+        // If it is not playing, then it should not be allowed to be apart of the loop either
+        if (!m_bPlay)
+            return;
+
+        m_LastPlayed = new LastPlayed(audioSource, syncColor,  fStartTime - m_LoopStartTime);
         TriggerSound(audioSource, fStartTime);
         TriggerEffect(syncColor, fStartTime);
     }
@@ -95,6 +118,69 @@ public class NetworkHandler : MonoBehaviour
             Debug.LogError("Trigger effect with start time: " + fStartTime + " could not be found");
     }
 
+    public bool GetUndoState()
+    {
+        return m_LastPlayed!=null;
+    }
+
+    public void UndoLastAction()
+    {
+        if (m_LastPlayed == null)
+        {
+            Debug.Log("No last action available. Ignoring...");
+            return;
+        }
+        
+
+
+        UndoAudio(m_LastPlayed.m_AudioSource, m_LastPlayed.m_fLoopTime);
+        UndoEffect(m_LastPlayed.m_AudioSyncColor, m_LastPlayed.m_fLoopTime);
+
+        m_LastPlayed = null;
+    }
+
+    private void UndoAudio(AudioSource audioSource, float fLoopTime)
+    {
+        float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
+        m_LastPlayed.m_AudioSource.clip.GetData(samples, 0);
+
+        float[] currentSamples = new float[audioSource.clip.samples * audioSource.clip.channels];
+        m_nextAudioSource.clip.GetData(currentSamples, (int)(fLoopTime * m_iSampleRate_Hz));
+
+        // Adding current track with the new track
+        float[] newSamples = new float[audioSource.clip.samples * m_nextAudioSource.clip.channels];
+        for (int i = 0; i < audioSource.clip.samples; i++)
+        {
+            newSamples[i] = currentSamples[i] - samples[i];
+        }
+
+        m_nextAudioSource.clip.SetData(newSamples, (int)(fLoopTime * m_iSampleRate_Hz));
+    }
+
+    private void UndoEffect(AudioSyncColor audioSyncColor, float fLoopTime)
+    {
+
+        Debug.Log("UndoLastAction");
+        // Reset last time if we have looped
+        for (int i = 0; i < m_SyncColorEffects.Count; ++i)
+        {
+            
+
+            // TODO: Check they're the same type of object
+            if (m_SyncColorEffects[i].Item1 <= fLoopTime+0.001 && m_SyncColorEffects[i].Item1 > fLoopTime - 0.001)
+            {
+                // Only allow if they're the same type of effect
+                if (m_listSyncColors[m_SyncColorEffects[i].Item2] != audioSyncColor)
+                    continue;
+
+                Debug.Log("NetworkHandler - Removing effect with loop time: " + m_SyncColorEffects[i].Item1);
+                m_SyncColorEffects.RemoveAt(i);
+                break;
+            }
+
+        }
+    }
+
     public void SetEditMode(bool bEnableEdit)
     {
 
@@ -171,16 +257,6 @@ public class NetworkHandler : MonoBehaviour
             if (m_bPlay)
                 m_currentAudioSource.Play();
 
-            //SendAudioTrackRequest();
-
-            // TODO: Master control will need to be checked here and exchanged at this point if master
-            /*
-            if(m_bMaster){
-                m_bMaster=false;
-                SendMasterControlRelease();
-                SendAudioStatusResponse();
-            }
-            */
         }
         else if (Time.time - m_LoopStartTime > m_LoopDuration_s)
             m_currentAudioSource.Stop();
@@ -382,6 +458,7 @@ public class NetworkHandler : MonoBehaviour
     private float LastTime; 
 
     private NetworkContext context;
+    private LastPlayed m_LastPlayed;
 
     public bool m_bPlay = true;
     bool m_bEdit = true;

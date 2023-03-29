@@ -19,6 +19,5 @@ public class NoButton : MonoBehaviour
     }
     public void OnButtonClick()
     {
-        Destroy(ConfirmationPanel);
     }
 }
