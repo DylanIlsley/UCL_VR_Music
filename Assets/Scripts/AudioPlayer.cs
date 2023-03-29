@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    private AudioSource source;
-    [SerializeField] private NetworkHandler NHandle;
+    public AudioSource source;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +25,5 @@ public class AudioPlayer : MonoBehaviour
 
     void playAudio(){
         source.Play();
-        NHandle.TriggerSound(source, (int)Time.time);
     }
 }

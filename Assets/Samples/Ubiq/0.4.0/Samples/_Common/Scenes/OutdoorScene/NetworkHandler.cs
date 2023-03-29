@@ -13,6 +13,13 @@ using UnityEngine.UI;
 
 public class NetworkHandler : MonoBehaviour
 {
+    // Calls for a network handle
+    public void TriggerNetworkPanel(AudioSource audioSource, AudioSyncColor syncColor, float fStartTime)
+    {
+        TriggerSound(audioSource, fStartTime);
+        TriggerEffect(syncColor, fStartTime);
+    }
+
     public void TriggerSound(AudioSource audioSource, float fStartTime)
     {
         Debug.Log("Triggering sound..." + audioSource.name);
@@ -66,6 +73,8 @@ public class NetworkHandler : MonoBehaviour
         // Only send effect if triggered locally
         SendEffectUpdate(iSyncIndex, fStartTime);
     }
+
+
 
     private void TriggerEffect(int iSyncID, float fStartTime)
     {
