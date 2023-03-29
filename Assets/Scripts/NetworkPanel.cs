@@ -39,6 +39,7 @@ public class NetworkPanel : MonoBehaviour
         if (!NHandle)
             return;
         float fCurrentTime = (float)Time.time;
+        Debug.Log(m_AudioPlayer.source.name);
         NHandle.TriggerNetworkPanel(m_AudioPlayer.source, m_EffectPlayer._audioSyncColor, fCurrentTime);
     }
 

@@ -20,7 +20,7 @@ public class EffectPlayer : MonoBehaviour
     }
 
     void PlayParticle(){
-        _hitEffect.Play();
+        //_hitEffect.Play();
         if(_audioSyncColor)
             _audioSyncColor.OnTrigger();
     }
