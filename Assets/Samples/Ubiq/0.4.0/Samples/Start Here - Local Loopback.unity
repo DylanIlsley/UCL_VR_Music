@@ -2516,7 +2516,7 @@ MonoBehaviour:
   bias: 0.3
   timeStep: 0.1
   timeToBeat: 0.12
-  restSmoothTime: 0.01
+  restSmoothTime: 0.1
   beatColors:
   - {r: 0.0047169924, g: 1, b: 0.9517961, a: 0}
   restColor: {r: 0, g: 0, b: 0, a: 0}
@@ -2931,9 +2931,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a3be7c061789b494db13ef84ce285df9, type: 2}
     - target: {fileID: 4781274667683332378, guid: 7a66904ce2377f1448e0176725967e0a, type: 3}
+      propertyPath: m_listSyncColors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781274667683332378, guid: 7a66904ce2377f1448e0176725967e0a, type: 3}
       propertyPath: m_listAudioSources.Array.size
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 4781274667683332378, guid: 7a66904ce2377f1448e0176725967e0a, type: 3}
+      propertyPath: m_listSyncColors.Array.data[0]
+      value: 
+      objectReference: {fileID: 224302780}
+    - target: {fileID: 4781274667683332378, guid: 7a66904ce2377f1448e0176725967e0a, type: 3}
+      propertyPath: m_listSyncColors.Array.data[1]
+      value: 
+      objectReference: {fileID: 876290968}
     - target: {fileID: 4781274667683332378, guid: 7a66904ce2377f1448e0176725967e0a, type: 3}
       propertyPath: m_listAudioSources.Array.data[1]
       value: 
@@ -6782,6 +6794,10 @@ PrefabInstance:
       value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 6942531494322667656, guid: b82b688be71094de89f526dc67cdb0eb, type: 3}
+      propertyPath: _NHandle
+      value: 
+      objectReference: {fileID: 960010293}
+    - target: {fileID: 6942531494322667656, guid: b82b688be71094de89f526dc67cdb0eb, type: 3}
       propertyPath: _audioSyncColor
       value: 
       objectReference: {fileID: 224302780}
@@ -6893,6 +6909,10 @@ PrefabInstance:
       propertyPath: animationCurve.m_Curve.Array.data[1].tangentMode
       value: 34
       objectReference: {fileID: 0}
+    - target: {fileID: 6942531494578290612, guid: b82b688be71094de89f526dc67cdb0eb, type: 3}
+      propertyPath: _NHandle
+      value: 
+      objectReference: {fileID: 960010293}
     - target: {fileID: 6942531494578290612, guid: b82b688be71094de89f526dc67cdb0eb, type: 3}
       propertyPath: _audioSyncColor
       value: 
