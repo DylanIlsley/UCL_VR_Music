@@ -5,8 +5,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     private AudioSource source;
-    [SerializeField] private NetworkHandler NHandle;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +13,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.name.Equals("Manipulator") == true)
-        {
+        if(other.gameObject.name.Equals("Manipulator") == true){
             playAudio();
         }
     }
@@ -26,6 +24,5 @@ public class AudioPlayer : MonoBehaviour
 
     void playAudio(){
         source.Play();
-        NHandle.TriggerSound(source, (int)Time.time);
     }
 }
