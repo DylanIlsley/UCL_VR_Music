@@ -16,6 +16,10 @@ public class followPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!player) {
+            Debug.LogWarning("Player not assigned");
+            return;
+        }
         transform.position = player.position + player.TransformDirection(offset);
         transform.rotation = Quaternion.Euler(15, 0, 0); 
         transform.rotation = player.rotation * Quaternion.Euler(15, 0, 0);
