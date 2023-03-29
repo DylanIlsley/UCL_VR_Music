@@ -57,6 +57,18 @@ public class NetworkHandler : MonoBehaviour
 
     public void TriggerEffect(AudioSyncColor syncColor, float fStartTime)
     {
+        if (!syncColor)
+            return;
+
+        int iSyncIndex = m_listSyncColors.IndexOf(syncColor);
+        float fLoopTime = fStartTime - m_LoopStartTime;
+        TriggerEffect(iSyncIndex, fLoopTime);
+        // Only send effect if triggered locally
+        SendEffectUpdate(iSyncIndex, fStartTime);
+    }
+
+    private void TriggerEffect(int iSyncID, float fStartTime)
+    {
         // Only play a sound and add it to the loop if it is in edit mode
         if (!m_bEdit)
             return;
@@ -65,18 +77,13 @@ public class NetworkHandler : MonoBehaviour
         if (!m_bPlay)
             return;
 
-        if (!syncColor)
-            return;
-
-        float fLoopTime = fStartTime - m_LoopStartTime;
-
-        int j = m_listSyncColors.IndexOf(syncColor);
-        if (j != -1)
+        if (iSyncID != -1)
         {
-            Debug.Log("NetworkHandler - Adding effect with loop time: " + fLoopTime);
-            m_SyncColorEffects.Add(Tuple.Create(fLoopTime, j));
+            Debug.Log("NetworkHandler - Adding effect with loop time: " + fStartTime);
+            m_SyncColorEffects.Add(Tuple.Create(fStartTime, iSyncID));
         }
-            
+        else
+            Debug.LogError("Trigger effect with start time: " + fStartTime + " could not be found");
     }
 
     public void SetEditMode(bool bEnableEdit)
@@ -182,6 +189,8 @@ public class NetworkHandler : MonoBehaviour
 
         RegisterUnitMessage(new AudioTrackClearRequest(), OnAudioTrackClear);
 
+        RegisterUnitMessage(new EffectUpdate(), OnEffectUpdate);
+
 
         // GROUP 1 - Master messages
         // RegisterUnitMessage(new MasterControlStatusRequestMessage(), OnMasterControlStatusRequest);
@@ -257,6 +266,22 @@ public class NetworkHandler : MonoBehaviour
         context.SendJson(new AudioTrackClearRequest()
         {
         });
+    }
+
+    public void SendEffectUpdate(int iEffectID, float fStartTime)
+    {
+        context.SendJson(new EffectUpdate()
+        {
+            m_iEffectID = iEffectID,
+            m_fStartTime = fStartTime
+        });; ;
+    }
+
+    private void OnEffectUpdate(ReferenceCountedSceneGraphMessage m)
+    {
+        var message = m.FromJson<EffectUpdate>();
+        TriggerEffect(message.m_iEffectID, message.m_fStartTime);
+
     }
 
     private void OnAudioTrackRequest(ReferenceCountedSceneGraphMessage m)
