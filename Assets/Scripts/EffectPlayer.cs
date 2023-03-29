@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class EffectPlayer : MonoBehaviour
 {
     [SerializeField] VisualEffect _hitEffect;
+    [SerializeField] AudioSyncColor _audioSyncColor;
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.name.Equals("Manipulator") == true)
@@ -20,6 +21,8 @@ public class EffectPlayer : MonoBehaviour
 
     void PlayParticle(){
         _hitEffect.Play();
+        if(_audioSyncColor)
+            _audioSyncColor.OnTrigger();
     }
 
 }
