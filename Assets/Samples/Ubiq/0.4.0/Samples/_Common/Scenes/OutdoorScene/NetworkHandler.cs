@@ -10,9 +10,39 @@ using AudioMessage;
 using Ubiq.Extensions;
 using UnityEngine.UI;
 
+public class LastPlayed
+{
+    public LastPlayed(AudioSource audioSource, AudioSyncColor audioSyncColor, float fLoopTime)
+    {
+        m_AudioSource = audioSource;
+        m_AudioSyncColor = audioSyncColor;
+        m_fLoopTime = fLoopTime;
+    }
+
+    public AudioSource m_AudioSource;
+    public AudioSyncColor m_AudioSyncColor;
+    public float m_fLoopTime;
+}
+
 
 public class NetworkHandler : MonoBehaviour
 {
+    // Calls for a network handle
+    public void TriggerNetworkPanel(AudioSource audioSource, AudioSyncColor syncColor, float fStartTime)
+    {
+        Debug.Log("Triggering network panel");
+        if (!m_bEdit)
+            return;
+
+        // If it is not playing, then it should not be allowed to be apart of the loop either
+        if (!m_bPlay)
+            return;
+
+        m_LastPlayed = new LastPlayed(audioSource, syncColor,  fStartTime - m_LoopStartTime);
+        TriggerSound(audioSource, fStartTime);
+        TriggerEffect(syncColor, fStartTime);
+    }
+
     public void TriggerSound(AudioSource audioSource, float fStartTime)
     {
         Debug.Log("Triggering sound..." + audioSource.name);
@@ -55,6 +85,102 @@ public class NetworkHandler : MonoBehaviour
 
     }
 
+    public void TriggerEffect(AudioSyncColor syncColor, float fStartTime)
+    {
+        if (!syncColor)
+            return;
+
+        int iSyncIndex = m_listSyncColors.IndexOf(syncColor);
+        float fLoopTime = fStartTime - m_LoopStartTime;
+        TriggerEffect(iSyncIndex, fLoopTime);
+        // Only send effect if triggered locally
+        SendEffectUpdate(iSyncIndex, fStartTime);
+    }
+
+
+
+    private void TriggerEffect(int iSyncID, float fStartTime)
+    {
+        // Only play a sound and add it to the loop if it is in edit mode
+        if (!m_bEdit)
+            return;
+
+        // If it is not playing, then it should not be allowed to be apart of the loop either
+        if (!m_bPlay)
+            return;
+
+        if (iSyncID != -1)
+        {
+            Debug.Log("NetworkHandler - Adding effect with loop time: " + fStartTime);
+            m_SyncColorEffects.Add(Tuple.Create(fStartTime, iSyncID));
+        }
+        else
+            Debug.LogError("Trigger effect with start time: " + fStartTime + " could not be found");
+    }
+
+    public bool GetUndoState()
+    {
+        return m_LastPlayed!=null;
+    }
+
+    public void UndoLastAction()
+    {
+        if (m_LastPlayed == null)
+        {
+            Debug.Log("No last action available. Ignoring...");
+            return;
+        }
+        
+
+
+        UndoAudio(m_LastPlayed.m_AudioSource, m_LastPlayed.m_fLoopTime);
+        UndoEffect(m_LastPlayed.m_AudioSyncColor, m_LastPlayed.m_fLoopTime);
+
+        m_LastPlayed = null;
+    }
+
+    private void UndoAudio(AudioSource audioSource, float fLoopTime)
+    {
+        float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
+        m_LastPlayed.m_AudioSource.clip.GetData(samples, 0);
+
+        float[] currentSamples = new float[audioSource.clip.samples * audioSource.clip.channels];
+        m_nextAudioSource.clip.GetData(currentSamples, (int)(fLoopTime * m_iSampleRate_Hz));
+
+        // Adding current track with the new track
+        float[] newSamples = new float[audioSource.clip.samples * m_nextAudioSource.clip.channels];
+        for (int i = 0; i < audioSource.clip.samples; i++)
+        {
+            newSamples[i] = currentSamples[i] - samples[i];
+        }
+
+        m_nextAudioSource.clip.SetData(newSamples, (int)(fLoopTime * m_iSampleRate_Hz));
+    }
+
+    private void UndoEffect(AudioSyncColor audioSyncColor, float fLoopTime)
+    {
+
+        Debug.Log("UndoLastAction");
+        // Reset last time if we have looped
+        for (int i = 0; i < m_SyncColorEffects.Count; ++i)
+        {
+            
+
+            // TODO: Check they're the same type of object
+            if (m_SyncColorEffects[i].Item1 <= fLoopTime+0.001 && m_SyncColorEffects[i].Item1 > fLoopTime - 0.001)
+            {
+                // Only allow if they're the same type of effect
+                if (m_listSyncColors[m_SyncColorEffects[i].Item2] != audioSyncColor)
+                    continue;
+
+                Debug.Log("NetworkHandler - Removing effect with loop time: " + m_SyncColorEffects[i].Item1);
+                m_SyncColorEffects.RemoveAt(i);
+                break;
+            }
+
+        }
+    }
+
     public void SetEditMode(bool bEnableEdit)
     {
 
@@ -86,7 +212,10 @@ public class NetworkHandler : MonoBehaviour
         Debug.Log("Clearing current recording");
 
         m_currentAudioSource.clip = AudioClip.Create("LoopedMusic", m_iSampleRate_Hz * (int)m_LoopDuration_s, 1, m_iSampleRate_Hz, false);
-        
+
+        m_SyncColorEffects.Clear();
+
+
         SendAudioTrackClear();
     }
 
@@ -111,6 +240,7 @@ public class NetworkHandler : MonoBehaviour
     void OnStart()
     {
         SendAudioTrackRequest();
+        m_SyncColorEffects = new List<Tuple<float, int>>();
     }
 
     // Update is called once per frame
@@ -127,19 +257,11 @@ public class NetworkHandler : MonoBehaviour
             if (m_bPlay)
                 m_currentAudioSource.Play();
 
-            //SendAudioTrackRequest();
-
-            // TODO: Master control will need to be checked here and exchanged at this point if master
-            /*
-            if(m_bMaster){
-                m_bMaster=false;
-                SendMasterControlRelease();
-                SendAudioStatusResponse();
-            }
-            */
         }
         else if (Time.time - m_LoopStartTime > m_LoopDuration_s)
             m_currentAudioSource.Stop();
+        else
+            TriggerEffects();
     }
 
     void RegisterUnitMessages()
@@ -151,6 +273,8 @@ public class NetworkHandler : MonoBehaviour
         RegisterUnitMessage(new AudioTrackUpdate(), OnAudioTrackUpdate);
 
         RegisterUnitMessage(new AudioTrackClearRequest(), OnAudioTrackClear);
+
+        RegisterUnitMessage(new EffectUpdate(), OnEffectUpdate);
 
 
         // GROUP 1 - Master messages
@@ -229,6 +353,22 @@ public class NetworkHandler : MonoBehaviour
         });
     }
 
+    public void SendEffectUpdate(int iEffectID, float fStartTime)
+    {
+        context.SendJson(new EffectUpdate()
+        {
+            m_iEffectID = iEffectID,
+            m_fStartTime = fStartTime
+        });; ;
+    }
+
+    private void OnEffectUpdate(ReferenceCountedSceneGraphMessage m)
+    {
+        var message = m.FromJson<EffectUpdate>();
+        TriggerEffect(message.m_iEffectID, message.m_fStartTime);
+
+    }
+
     private void OnAudioTrackRequest(ReferenceCountedSceneGraphMessage m)
     {
         Debug.Log("OnAudioTrackRequest received");
@@ -285,108 +425,27 @@ public class NetworkHandler : MonoBehaviour
         return (int)(Time.time - m_LoopStartTime);
     }
 
-
-
-    /*
-    public void SendMasterControlStatusRequest()
+    public void TriggerEffects()
     {
-        context.SendJson(new MasterControlStatusRequestMessage()
+        float currentTime = Time.time - m_LoopStartTime;
+        // Reset last time if we have looped
+        if (LastTime > currentTime)
+            LastTime = 0.0f;
+        for (int i=0; i< m_SyncColorEffects.Count; ++i)
         {
-        });
-    }
-   
-    public void SendMasterControlRelease()
-    {
-        context.SendJson(new MasterControlReleaseMessage()
-        {
-        });
-    }
+            if (m_SyncColorEffects[i].Item1 <= currentTime && m_SyncColorEffects[i].Item1 > LastTime)
+            {
+                Debug.Log("NetworkHandler - Triggering effect with loop time: " + m_SyncColorEffects[i].Item1);
+                m_listSyncColors[m_SyncColorEffects[i].Item2].OnTrigger();
+            }
+               
+        }
 
-
-    public void SendMasterControlStatusResponse()
-    {
-        context.SendJson(new MasterControlStatusResponseMessage()
-        {
-
-        });
-    }
-
-    public void SendAudioStatusRequest()
-    {
-        context.SendJson(new AudioStatusRequestMessage()
-        {
-        });
-    }
-
-    public void SendAudioStatusResponse(List<AudioSource> listAudioSource, bool bPrompted)
-    {
-
-        context.SendJson(new AudioStatusResponseMessage()
-        {
-            listAudioSourceFiles = listAudioSource
-        });
-
-    }
-
-    private void OnAudioStatusRequest(ReferenceCountedSceneGraphMessage m)
-    {
-        // Do not need to actually need to convert anything
-        Debug.Log("OnAudioStatusRequest received");
-
-
-        // TODO: Use a seperate thread for this
-        List<AudioSource> audioSourceList = new List<AudioSource>();
-        audioSourceList.Add(m_currentAudioSource);
-
-        SendAudioStatusResponse(audioSourceList, true);
+        // Call back on the effect every time it loops around...
+        LastTime = currentTime;
     }
 
 
-    private void OnAudioStatusResponse(ReferenceCountedSceneGraphMessage m)
-    {
-        Debug.Log("OnAudioStatusResponse received");
-
-        var message = m.FromJson<AudioStatusResponseMessage>();
-
-        // TODO: Use a loop builder. For now just save the firstfile and then continue
-        m_mxAudioSourceLock.WaitOne();
-        m_nextAudioSource = message.listAudioSourceFiles[0];
-        m_mxAudioSourceLock.ReleaseMutex();
-        // Used for debugging
-        m_nextAudioSource.Play();
-    }
-
-    private void OnMasterControlRelease(ReferenceCountedSceneGraphMessage m)
-    {
-        Debug.Log("OnMasterControlRelease received");
-        var message = m.FromJson<MasterControlReleaseMessage>();
-
-
-        // Set master state if they have released master status. This will be used to flag certain events
-        m_mxMasterLock.WaitOne();
-        m_bMaster = true;
-        m_mxMasterLock.ReleaseMutex();
-        SendMasterControlStatusResponse();
-    }
-
-    private void OnMasterControlStatusRequest(ReferenceCountedSceneGraphMessage m)
-    {
-        var message = m.FromJson<MasterControlStatusRequestMessage>();
-
-        SendMasterControlStatusResponse();
-    }
-
-    private void OnMasterControlStatusResponse(ReferenceCountedSceneGraphMessage m)
-    {
-        var message = m.FromJson<MasterControlStatusResponseMessage>();
-
-        // Check to see for various thing
-        m_mxMasterLock.WaitOne();
-        if (m_bMaster && message.m_strUserID != "")
-            Debug.LogWarning("MasterControlStatusResponse message received with user ID, clashing master control....");
-        m_mxMasterLock.ReleaseMutex();
-    }
-    */
 
     /// --------------------------------------------------------
     ///  MEMBER VARIABLES
@@ -394,7 +453,12 @@ public class NetworkHandler : MonoBehaviour
     private Dictionary<Tuple<uint, uint>, Action<ReferenceCountedSceneGraphMessage>> m_dictRegisteredUnits;
     public NetworkId NetworkId { get; set; }
 
+    private List<Tuple<float, int>> m_SyncColorEffects;
+    public List<AudioSyncColor> m_listSyncColors;
+    private float LastTime; 
+
     private NetworkContext context;
+    private LastPlayed m_LastPlayed;
 
     public bool m_bPlay = true;
     bool m_bEdit = true;

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    private AudioSource source;
-    
+    public AudioSource source;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +13,8 @@ public class AudioPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.name.Equals("Manipulator") == true){
+        if(other.gameObject.name.Equals("Manipulator") == true)
+        {
             playAudio();
         }
     }

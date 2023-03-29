@@ -98,11 +98,11 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.11748052, g: 1, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseSpeed: {r: 0, g: -0.05, b: 0, a: 0}
-    - _NoiseTiling: {r: 7, g: 0.1, b: 0, a: 0}
+    - _NoiseTiling: {r: 50, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6983900890048620887
 MonoBehaviour:

@@ -52,6 +52,8 @@ namespace AudioMessage
         //int m_newAudioID;
         public float m_fStartTime = -1;
     }
+
+   
     
     class AudioTrackClearRequest : MessageInterface
     {
@@ -62,6 +64,18 @@ namespace AudioMessage
         }
     }
 
+    class EffectUpdate : MessageInterface
+    {
+        public EffectUpdate()
+        {
+            m_uGroupID = 3;
+            m_uUnitID = 1;
+        }
+
+        public int m_iEffectID = -1;
+        public float m_fStartTime = -1;
+    }
+}
     /*
     class MasterControlStatusRequestMessage: MessageInterface
     {
@@ -116,5 +130,5 @@ namespace AudioMessage
         public override uint GetUnitID() { return 2; }
     }
     */
-}
+
 
