@@ -2485,7 +2485,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.117647044, b: 0.17514952, a: 1}
   - {r: 1, g: 0.30134785, b: 0.051886797, a: 1}
   - {r: 1, g: 0.033018887, b: 0.32571903, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0.6603774, g: 0.09656461, b: 0.13448922, a: 0}
 --- !u!114 &224302781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2919,7 +2919,7 @@ MonoBehaviour:
   restSmoothTime: 0.2
   beatColors:
   - {r: 0, g: 0.71642184, b: 1, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0, g: 0.38590455, b: 0.5377358, a: 1}
 --- !u!114 &301909176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3211,8 +3211,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319170365}
-  m_LocalRotation: {x: -0.38347474, y: -0.47229463, z: 0.5794998, w: -0.54227763}
-  m_LocalPosition: {x: 0, y: 0, z: 0.37}
+  m_LocalRotation: {x: -0.45849663, y: -0.5517976, z: 0.5043827, w: -0.48051882}
+  m_LocalPosition: {x: 0, y: 0, z: 0.36999807}
   m_LocalScale: {x: 40.825256, y: 1.5225997, z: 1.3037003}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3222,7 +3222,7 @@ RectTransform:
   - {fileID: 1170931615}
   m_Father: {fileID: 1707694649}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 85.763, y: 113.448, z: 16.726}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -37.42, y: 42.9}
@@ -5831,7 +5831,7 @@ MonoBehaviour:
   restSmoothTime: 0.2
   beatColors:
   - {r: 0, g: 0.71642184, b: 1, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0, g: 0.38590455, b: 0.5377358, a: 1}
 --- !u!114 &506770590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10229,8 +10229,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731844594}
-  m_LocalRotation: {x: -0.38347474, y: -0.47229463, z: 0.5794998, w: -0.54227763}
-  m_LocalPosition: {x: 0, y: 0, z: 0.37}
+  m_LocalRotation: {x: -0.45849663, y: -0.5517976, z: 0.5043827, w: -0.48051882}
+  m_LocalPosition: {x: 0, y: 0, z: 0.36999807}
   m_LocalScale: {x: 40.82526, y: 1.5225998, z: 1.3037002}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10242,7 +10242,7 @@ RectTransform:
   - {fileID: 301909174}
   m_Father: {fileID: 1707694649}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 85.763, y: 113.448, z: 16.726}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -37.42, y: 42.9}
@@ -10474,7 +10474,7 @@ MonoBehaviour:
   restSmoothTime: 0.2
   beatColors:
   - {r: 0, g: 0.71642184, b: 1, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0, g: 0.38590455, b: 0.5377358, a: 1}
 --- !u!114 &770452615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13442,8 +13442,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012970801}
-  m_LocalRotation: {x: -0.38347474, y: -0.47229463, z: 0.5794998, w: -0.54227763}
-  m_LocalPosition: {x: 0, y: 0, z: 0.37}
+  m_LocalRotation: {x: -0.45849663, y: -0.5517976, z: 0.5043827, w: -0.48051882}
+  m_LocalPosition: {x: 0, y: 0, z: 0.36999807}
   m_LocalScale: {x: 40.825264, y: 1.5225999, z: 1.3037001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13457,7 +13457,7 @@ RectTransform:
   - {fileID: 1260756606}
   m_Father: {fileID: 1707694649}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 85.763, y: 113.448, z: 16.726}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -37.42, y: 42.9}
@@ -14149,8 +14149,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109735653}
   m_LocalRotation: {x: 0.07642019, y: -0.18211992, z: 0.23295651, w: 0.9522204}
-  m_LocalPosition: {x: 0, y: 0, z: 5.428678}
-  m_LocalScale: {x: 1.4451827, y: 0.14841916, z: 0.2534619}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalScale: {x: 1.4451827, y: 0.14841916, z: 2.8359914}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1012970802}
@@ -14158,7 +14158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -234.405, y: 167.184, z: 99.616}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.48488712, y: 29.651814}
+  m_AnchoredPosition: {x: -0.871, y: 28.74}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109735655
@@ -14181,7 +14181,7 @@ MonoBehaviour:
   - {r: 0.99215686, g: 0.117647044, b: 0.17514952, a: 1}
   - {r: 1, g: 0.30134785, b: 0.051886797, a: 1}
   - {r: 1, g: 0.033018887, b: 0.32571903, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0.5188679, g: 0.10034709, b: 0.1284987, a: 1}
 --- !u!114 &1109735656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17430,7 +17430,7 @@ MonoBehaviour:
   restSmoothTime: 0.2
   beatColors:
   - {r: 0, g: 0.71642184, b: 1, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0, g: 0.38590455, b: 0.5377358, a: 1}
 --- !u!114 &1255182858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17767,8 +17767,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297883426}
   m_LocalRotation: {x: 0.07642019, y: -0.18211992, z: 0.23295651, w: 0.9522204}
-  m_LocalPosition: {x: 0, y: 0, z: 2.4717214}
-  m_LocalScale: {x: 1.4451828, y: 0.14841917, z: 0.2534619}
+  m_LocalPosition: {x: 0, y: 0, z: -19.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 731844595}
@@ -17776,8 +17776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -234.405, y: 167.184, z: 99.616}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.13713646, y: 30.933357}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -0.328, y: 31.59}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297883428
 MonoBehaviour:
@@ -17797,7 +17797,7 @@ MonoBehaviour:
   restSmoothTime: 0.2
   beatColors:
   - {r: 0, g: 0.71642184, b: 1, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0, g: 0.38590455, b: 0.5377358, a: 1}
 --- !u!114 &1297883429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20907,7 +20907,7 @@ MonoBehaviour:
   restSmoothTime: 0.2
   beatColors:
   - {r: 0, g: 0.71642184, b: 1, a: 1}
-  restColor: {r: 0, g: 0, b: 0, a: 0}
+  restColor: {r: 0, g: 0.38590455, b: 0.5377358, a: 1}
 --- !u!114 &1691878939
 MonoBehaviour:
   m_ObjectHideFlags: 0
