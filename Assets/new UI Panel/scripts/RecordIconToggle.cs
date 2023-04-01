@@ -12,6 +12,7 @@ public class RecordIconToggle : MonoBehaviour
     void Start()
     {
         m_Image = GetComponent<RawImage>();
+
     }
 
     // Update is called once per frame
