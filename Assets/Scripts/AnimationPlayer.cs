@@ -14,7 +14,10 @@ public class AnimationPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        playAnimation();
+        if (other.gameObject.name.Equals("Manipulator"))
+        {
+            playAnimation();
+        }
     }
 
     private void OnMouseDown() {

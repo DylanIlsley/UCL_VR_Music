@@ -13,7 +13,10 @@ public class AudioPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        playAudio();
+        if (other.gameObject.name.Equals("Manipulator"))
+        {
+            playAudio();
+        }
     }
 
     private void OnMouseDown() {
