@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     public AudioSource source;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,10 +13,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.name.Equals("Manipulator") == true)
-        {
-            playAudio();
-        }
+        playAudio();
     }
 
     private void OnMouseDown() {

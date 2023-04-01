@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioPlayer), typeof(EffectPlayer))]
 public class NetworkPanel : MonoBehaviour
 {
-    private AudioPlayer m_AudioPlayer;
-    private EffectPlayer m_EffectPlayer;
+    public AudioPlayer m_AudioPlayer;
+    public EffectPlayer m_EffectPlayer;
     [SerializeField] private NetworkHandler NHandle;
 
     // Start is called before the first frame update
