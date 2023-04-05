@@ -2766,7 +2766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2132512451265813978}
   m_Layer: 0
-  m_Name: RockStructure
+  m_Name: RockStructure - Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
